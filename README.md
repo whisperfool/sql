@@ -1,3 +1,35 @@
+Homework 1. 
+
+Logical data model for Bank
+
+Table 1: Customers              Table 2: Accounts
+
+  Column                          Column
+
+cusomter_id     ----------      account_id
+name                            customer_id
+address                         account_type
+phone_number                    balance
+
+Relationship type
+
+Customers: This contain information about customer.
+
+Accounts: This holds or stores information about accounts held    
+          by customer.
+
+
+
+
+
+
+
+
+
+
+
+
+
 # SQL
 
 ## Content
