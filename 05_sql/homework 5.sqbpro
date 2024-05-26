@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/Theodore/Desktop/SQL_1/sql/05_sql/farmersmarket.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="4339"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,5:mainbooth"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="booth" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="103"/><column index="2" value="124"/><column index="3" value="300"/><column index="4" value="84"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1"></sql><sql name="SQL 4">SELECT v.vendor_name,p.product_name,original_price * 5 * customer_count AS earning_per_product
+FROM
+vendor_inventory AS vi
+INNER JOIN
+product AS p ON vi.product_id = p.product_id
+INNER JOIN
+vendor AS v ON vi.vendor_id = v.vendor_id
+CROSS JOIN
+(SELECT COUNT(DISTINCT customer_id) AS customer_count FROM customer);
+
+DROP TABLE IF EXISTS product_units;
+ 
+CREATE TABLE product_units AS
+SELECT *,
+CURRENT_TIMESTAMP AS snapshot_timestamp
+FROM 
+product
+WHERE 
+product_qty_type = 'unit';
+
+SELECT * FROM product_units;
+
+INSERT INTO product_units (product_id, product_name, product_size, product_category_id, product_qty_type, snapshot_timestamp)
+VALUES(01 , ' Beef Roti', 'medium', 8, 'unit', CURRENT_TIMESTAMP);
+
+SELECT * FROM product_units;
+
+SELECT product_id, MIN(snapshot_timestamp) AS oldest_timestamp
+FROM product_units
+WHERE product_name = 'Beef Roti'
+GROUP BY product_id;
+
+DELETE FROM product_units
+WHERE product_name = 'Beef Roti'
+AND snapshot_timestamp = (
+SELECT MIN(snapshot_timestamp)
+FROM product_units
+WHERE product_name = 'Beef Roti'
+);
+
+-- add COLUMN
+ALTER TABLE product_units
+ADD current_quantity INT;
+
+
+
+
+	
+
+
+
+
+
+
+</sql><current_tab id="1"/></tab_sql></sqlb_project>
