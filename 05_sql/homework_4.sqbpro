@@ -52,4 +52,61 @@ ADD current_quantity INT;
 
 
 
-</sql><current_tab id="1"/></tab_sql></sqlb_project>
+</sql><sql name="SQL 5">SELECT 
+    product_name || ', ' || COALESCE(product_size, '') || ' (' || COALESCE(product_qty_type, 'unit') || ')'
+FROM 
+    product;
+</sql><sql name="SQL 6">SELECT product_name || ', ' || 
+COALESCE(product_size, '') || ' (' || 
+COALESCE(product_qty_type, 'unit') || ')'
+FROM product;
+
+SELECT customer_id, market_date,
+ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY market_date) AS visit_number
+FROM customer_purchases;
+
+
+WITH recent_visits AS (
+SELECT customer_id,market_date,
+ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY market_date DESC) AS visit_number
+FROM 
+customer_purchases)
+
+SELECT customer_id, market_date
+FROM recent_visits
+WHERE visit_number = 1;
+
+SELECT customer_id,product_id,market_date, quantity, 
+COUNT(*) OVER (PARTITION BY customer_id, product_id) as purchase_count
+FROM customer_purchases;
+
+SELECT product_name,
+TRIM(SUBSTR(product_name, INSTR(product_name, '-') + 1)) AS description
+FROM product
+WHERE 
+INSTR(product_name, '-') &gt; 0;
+
+WITH sales_by_date AS (
+SELECT market_date, 
+SUM(quantity * cost_to_customer_per_qty) as total_sales
+FROM customer_purchases
+GROUP BY market_date),
+
+ranked_sales AS (
+SELECT market_date, total_sales, 
+RANK() OVER (ORDER BY total_sales DESC) as sales_rank_desc,
+RANK() OVER (ORDER BY total_sales ASC) as sales_rank_asc
+FROM sales_by_date)
+
+SELECT market_date, total_sales, 'Highest Sales' as sales_type
+FROM ranked_sales
+WHERE sales_rank_desc = 1
+
+UNION
+
+SELECT market_date, total_sales, 
+'Lowest Sales' as sales_type
+FROM ranked_sales
+WHERE sales_rank_asc = 1;
+
+</sql><current_tab id="3"/></tab_sql></sqlb_project>
