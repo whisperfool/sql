@@ -44,8 +44,7 @@ Your answer...
 
 1b)The small bookstore  for our assignment emphasizes on core elements such as employees, orders, sales, customers and books.
 
-1c) AdventureWorks displays a larger data set which displays how  a large business works while on the other hand The small bookstore displays a smaller data set eflective of a local or niche bookstore with fewer transactions.
-
+1c) AdventureWorks displays a larger data set which displays how  a large business works while on the other hand The small bookstore displays a smaller data set reflective of a local or niche bookstore with fewer transactions.
 *** Changes ***
 
 2a) Yes i could make changes to my small bookstore data set by even going further to reflect more. 
