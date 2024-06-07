@@ -16,6 +16,19 @@ _Hint, search type 1 vs type 2 slowly changing dimensions._
 Bonus: Are there privacy implications to this, why or why not?
 ```
 Your answer...
+
+A) Please see ERD 2 diagram for both Architectures of CUSTOMER_ADDRESS table that will retain changes and the other that will Overwrite changes.
+
+Type 1 is Overwrite.
+Type 2 is Retain.
+This is shown on the overall Small bookstore Schema jpeg.
+
+B) 
+B1)For overwrite changes, if an address change is incorrect or fraudulent, all historical context is lost, which can complicate resolving issues related to the address.
+
+B2)For retain changes, storing historical addresses increases the risk of data breaches, as more personal information is maintained over time. It is crucial to implement strong data security measures and access controls to mitigate this risk.
+
+
 ```
 
 ## Question 4
@@ -25,6 +38,24 @@ Highlight at least two differences between it and your ERD. Would you change any
 ```
 Your answer...
 ```
+*** Differences ***
+
+1a) The complexity and detailed graph of AdventureWorks Schema shows how vast an organization is and documented to show tables and relationships across various business domains sales, production, human resources and more.
+
+1b)The small bookstore  for our assignment emphasizes on core elements such as employees, orders, sales, customers and books.
+
+1c) AdventureWorks displays a larger data set which displays how  a large business works while on the other hand The small bookstore displays a smaller data set reflective of a local or niche bookstore with fewer transactions.
+*** Changes ***
+
+2a) Yes i could make changes to my small bookstore data set by even going further to reflect more. 
+
+For example:
+
+Inventory to track the inventory levels of each book and when it was last updated.
+
+Publisher to store information about book publishers for better tracking of books. This can even help owner to see which publishers are more popular among buyers for better sales.
+
+
 
 # Criteria
 
@@ -49,4 +80,4 @@ Checklist:
 - [ ] Review [the PR description guidelines](https://github.com/UofT-DSI/onboarding/blob/main/onboarding_documents/submissions.md#guidelines-for-pull-request-descriptions) and adhere to them.
 - [ ] Verify that the link is accessible in a private browser window.
 
-If you encounter any difficulties or have questions, please don't hesitate to reach out to our team via our Slack at `#cohort-3-help`. Our Technical Facilitators and Learning Support staff are here to help you navigate any challenges.
+If you encounter any difficulties or have questions, please don't hesitate to reach out to our team via our Slack at `#cohort-3-help`. Our Technical Facilitators and Learning Support staff are here to help you navigate any challenges...
